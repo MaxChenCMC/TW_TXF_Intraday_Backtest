@@ -17,10 +17,13 @@
 附圖為使用交易策略`連三根黑k`、`上影線`、`吞噬線`時的績效表現
 
 ![連三黑](https://i.imgur.com/1tGUmEX.png)
+> ↑不設停損，↓停損設90點
 ![連三黑](https://i.imgur.com/QvVtZJo.png)
 * * *
 ![上影線](https://i.imgur.com/iGbtcQf.png)
+> ↑不設停損，↓停損設90點
 ![上影線](https://i.imgur.com/4agYC0P.png)
 * * *
 ![吞噬線](https://i.imgur.com/8qAhDzF.png)
+> ↑不設停損，↓停損設90點
 ![吞噬線](https://i.imgur.com/PmUbasY.png)
