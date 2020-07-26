@@ -10,6 +10,6 @@
 
 並將停損考慮進去以優化績效
 
-![圖一](https://imgur.com/iGbtcQf)
+![圖一](https://i.imgur.com/iGbtcQf.png)
 
-![圖二](https://imgur.com/4agYC0P)
+![圖二](https://i.imgur.com/4agYC0P.png)
