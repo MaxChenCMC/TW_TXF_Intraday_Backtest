@@ -1,6 +1,5 @@
-import streamlit as st
 import pandas as pd
-import requests, time, datetime  # Pep8 request inline coment upper its first letter.__#_井前空2後空1。說不同套件不該擠在同一行，而只引用一個大套件的其中數個小套件就可擠同一行
+import requests, time, datetime 
 from io import StringIO
 from bs4 import BeautifulSoup
 from FinMind.data import DataLoader
@@ -134,63 +133,44 @@ def gold_ma():
     return tw50
 
 
-def active():
-    st.subheader(f"{last_update}三大法人大小台動向")
-    st.text("盤後15:00左右更新")
-    st.table(oi_last())
-
-    st.header("歷史行情籌碼解讀")
-    show = st.button("我瞧瞧(需要2分鐘)")
-    if show:
-        comb = pd.concat([oi_history(), gold_ma()], axis=1)
-        comb.index = comb.index.strftime("%Y-%m-%d")
-        comb.columns = [
-            "外資現股買賣超",
-            "投信現股買賣超",
-            "外資大台多空淨額",
-            "外資大台未平倉",
-            "外資小台多空淨額",
-            "外資小台未平倉",
-            "前50大權值股站上十日線總檔數",
-        ]
-        st.table(comb.tail())
-        st.markdown(
-            """
-        ● 法人現股買賣超若比過去5日的平均值還多，表示法人偏多；反之則偏空。
-
-        ● 外資大小台當日多空淨額若為正，即表示偏多，而未平倉口數若較過去5日的中位數高，即表示行情偏多；反之則偏空。
-
-        ● 上市前50大權值股中，若站上十日線的檔數比過去5日平均還多，則行情偏多。
-
-        `歷史行情7個欄位中，若都沒出現訊號則行情偏空，而訊號 4~7 則行情偏多`
-
-        """
-        )
-        df = pd.DataFrame()
-        df["f1"] = (
-            comb.iloc[:, 0] > comb.iloc[:, 0].rolling(5).mean()
-        )  # 中位 ☛ 多停85；空整體都有利
-        df["f2"] = comb.iloc[:, 1] > comb.iloc[:, 1].rolling(5).mean()  # 唯一選擇 平均
-        df["f3"] = comb.iloc[:, 2] > 0
-        df["f4"] = comb.iloc[:, 3] > comb.iloc[:, 3].rolling(5).median()
-        df["f5"] = comb.iloc[:, 4] > 0
-        df["f6"] = (comb.iloc[:, 5] > comb.iloc[:, 5].rolling(5).median()) & (
-            comb.iloc[:, 5] > 0
-        )
-        df["f7"] = comb.iloc[:, 6] > comb.iloc[:, 6].rolling(5).mean()
-        df.columns = [
-            "外資現股買賣超",
-            "投信現股買賣超",
-            "外資大台多空淨額",
-            "外資大台未平倉",
-            "外資小台多空淨額",
-            "外資小台未平倉",
-            "前50大權值股站上十日線總檔數",
-        ]
-        st.table(df.tail(1))
-        df_ = df.sum(axis=1).to_frame().tail().T
-        df_.index = ["訊號"]
-        st.table(df_)
+print(oi_last())
 
 
-active()
+comb = pd.concat([oi_history(), gold_ma()], axis=1)
+comb.index = comb.index.strftime("%Y-%m-%d")
+comb.columns = [
+    "外資現股買賣超",
+    "投信現股買賣超",
+    "外資大台多空淨額",
+    "外資大台未平倉",
+    "外資小台多空淨額",
+    "外資小台未平倉",
+    "前50大權值股站上十日線總檔數",
+]
+
+
+df = pd.DataFrame()
+df["f1"] = (
+    comb.iloc[:, 0] > comb.iloc[:, 0].rolling(5).mean()
+)  # 中位 ☛ 多停85；空整體都有利
+df["f2"] = comb.iloc[:, 1] > comb.iloc[:, 1].rolling(5).mean()  # 唯一選擇 平均
+df["f3"] = comb.iloc[:, 2] > 0
+df["f4"] = comb.iloc[:, 3] > comb.iloc[:, 3].rolling(5).median()
+df["f5"] = comb.iloc[:, 4] > 0
+df["f6"] = (comb.iloc[:, 5] > comb.iloc[:, 5].rolling(5).median()) & (
+    comb.iloc[:, 5] > 0
+)
+df["f7"] = comb.iloc[:, 6] > comb.iloc[:, 6].rolling(5).mean()
+df.columns = [
+    "外資現股買賣超",
+    "投信現股買賣超",
+    "外資大台多空淨額",
+    "外資大台未平倉",
+    "外資小台多空淨額",
+    "外資小台未平倉",
+    "前50大權值股站上十日線總檔數",
+]
+
+df_ = df.sum(axis=1).to_frame().tail().T
+df_.index = ["訊號"]
+print(df_)
