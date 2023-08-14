@@ -16,3 +16,8 @@ Multiple features:當7個條件滿足3項，即於隔日08:45一開盤進場<br>
 
 ![台指期連續週線圖](https://i.imgur.com/frj2HQ1.png)
 ![發行量加權股價報酬指數](https://i.imgur.com/VNRI1s9.png)
+
+
+將ipynb於github網址裡github.com改成colab.research.google.com/github就可在colab開啟<br>
+https://github.com/MaxChenCMC/TW_TXF_Intraday_Backtest/blob/master/Program.ipynb<br>
+https://colab.research.google.com/github/MaxChenCMC/TW_TXF_Intraday_Backtest/blob/master/Program.ipynb
